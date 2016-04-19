@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="MobileAnalization:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="CRM-MedicalClinic.war">
-      <element id="artifact" artifact-name="MobileAnalization:war exploded" />
-    </root>
-  </artifact>
-</component>
