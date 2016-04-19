@@ -32,6 +32,7 @@ public class CalculatorController {
         String params = requestCreateService.createRequest(request);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://unlimtariffs.ru/calculator/"+params+".json", String.class);
+//        responseEntity.getBody()
         model.addAttribute("r_body", responseEntity.toString());
         return "results";
     }
