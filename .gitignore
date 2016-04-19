@@ -70,3 +70,6 @@ buildNumber.properties
 
 */idea
 /.idea
+
+MobileAnalization.iml
+*.iml
