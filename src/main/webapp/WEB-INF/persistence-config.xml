@@ -8,10 +8,10 @@
     <jpa:repositories base-package="com.salats.repository"/>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="${jbdc.driver}"/>
-        <property name="jdbcUrl" value="${jbdc.url}"/>
-        <property name="user" value="${jbdc.username}"/>
-        <property name="password" value="${jbdc.password}"/>
+        <property name="driverClass" value="${jbds.driver}"/>
+        <property name="jdbcUrl" value="${jbds.url}"/>
+        <property name="user" value="${jbds.username}"/>
+        <property name="password" value="${jbds.password}"/>
     </bean>
 
     <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="bitches_1" author="GoodBoy">
+        <loadUpdateData tableName="users" primaryKey="id" file="db/seeds/users.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="bitches_2" author="GoodBoy">
+        <loadUpdateData tableName="sms" primaryKey="id" file="db/seeds/sms.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="bitches_3" author="GoodBoy">
+        <loadUpdateData tableName="call" primaryKey="id" file="db/seeds/call.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="bitches_4" author="GoodBoy">
+        <loadUpdateData tableName="web_connection" primaryKey="id" file="db/seeds/web_connection.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="bitches_5" author="GoodBoy">
+        <loadUpdateData tableName="wi_fi_connection" primaryKey="id" file="db/seeds/wi_fi_connection.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+
+</databaseChangeLog>
