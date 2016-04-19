@@ -1,5 +1,7 @@
 package com.salats.controller;
 
+import com.salats.service.UnlimTarrifsRequestCreateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ import java.util.Map;
 @RequestMapping("calculator")
 public class CalculatorController {
 
+    @Autowired
+    UnlimTarrifsRequestCreateService requestCreateService;
+
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String getSearchPage() {
         return "search";
@@ -24,14 +29,9 @@ public class CalculatorController {
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
     public String searchTarifs(HttpServletRequest request, Model model) {
-        Map map = request.getParameterMap();
-        String[] operators = (String[]) map.get("operators[]");
-        String[] duration = (String[]) map.get("duration");
-        String[] byRussian = (String[]) map.get("by_russia");
-        String[] internet = (String[]) map.get("internet");
-        String[] sms = (String[]) map.get("sms");
+        String params = requestCreateService.createRequest(request);
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://unlimtariffs.ru/calculator/?operators%5B%5D=1&operators%5B%5D=3&operators%5B%5D=4&operators%5B%5D=5&duration=1&by_russia=1&internet=2&sms=2.json", String.class);
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://unlimtariffs.ru/calculator/"+params+".json", String.class);
         model.addAttribute("r_body", responseEntity.toString());
         return "results";
     }
