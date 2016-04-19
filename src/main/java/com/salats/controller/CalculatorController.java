@@ -1,16 +1,16 @@
 package com.salats.controller;
 
-import com.salats.service.UnlimTarrifsRequestCreateService;
+import com.salats.service.ProviderResponseParser;
+import com.salats.utils.Tariff;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by aleksandrpliskin on 19.04.16.
@@ -20,7 +20,7 @@ import java.util.Map;
 public class CalculatorController {
 
     @Autowired
-    UnlimTarrifsRequestCreateService requestCreateService;
+    private ProviderResponseParser parser;
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String getSearchPage() {
@@ -28,11 +28,9 @@ public class CalculatorController {
     }
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
-    public String searchTarifs(HttpServletRequest request, Model model) {
-        String params = requestCreateService.createRequest(request);
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://unlimtariffs.ru/calculator/"+params+".json", String.class);
-        model.addAttribute("r_body", responseEntity.toString());
+    public String searchTarifs(HttpServletRequest request, Model model) throws IOException {
+        List<Tariff> tariff = parser.parse(request);
+        model.addAttribute("tariffs", tariff);
         return "results";
     }
 
