@@ -18,7 +18,7 @@ public class UserInfoController {
 
     @RequestMapping(value = "userInfo", method = RequestMethod.GET)
     public String getUserInfo(Model model) {
-        model.addAttribute("info", userService.getInfoByUserId(1L));
+        model.addAttribute("info", userService.getInfoByCurrentUser());
         return "userInfoTest";
     }
 

@@ -7,6 +7,5 @@ import com.salats.utils.UserInfo;
  */
 public interface UserService {
 
-    UserInfo getInfoByUserId(Long id);
-
+    UserInfo getInfoByCurrentUser();
 }

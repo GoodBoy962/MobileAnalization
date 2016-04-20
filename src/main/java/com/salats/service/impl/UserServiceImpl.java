@@ -3,6 +3,7 @@ package com.salats.service.impl;
 import com.salats.model.User;
 import com.salats.repository.*;
 import com.salats.service.UserService;
+import com.salats.utils.SecurityUtils;
 import com.salats.utils.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,13 +30,15 @@ public class UserServiceImpl implements UserService {
     WifiConnectionRepository wifiConnectionRepository;
 
     @Override
-    public UserInfo getInfoByUserId(Long id) {
+    public UserInfo getInfoByCurrentUser() {
+        User user = SecurityUtils.getCurrentUser();
+        Integer sms = smsRepository.findSmsCountByUserBetweenStartDateAndEndDate(user);
+        Integer call = callRepository.findSumDurationByUserBetweenStartDateAndEndDate(user);
+        Integer webTraffic = webConnectionRepository.findDurationByUser(user) - wifiConnectionRepository.findDurationByUser(user);
         UserInfo userInfo = new UserInfo();
-        User user = userRepository.findOne(id);
-        userInfo.setCall(callRepository.findSumDurationByUserBetweenStartDateAndEndDate(user));
-        userInfo.setSms(smsRepository.findSmsCountByUserBetweenStartDateAndEndDate(user));
-        userInfo.setWebTraffic(webConnectionRepository.findDurationByUser(user) -
-                wifiConnectionRepository.findDurationByUser(user));
+        userInfo.setSms(sms);
+        userInfo.setCall(call);
+        userInfo.setWebTraffic(webTraffic);
         return userInfo;
     }
 }
