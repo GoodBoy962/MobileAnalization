@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by aleksandrpliskin on 19.04.16.
  */
 @Controller
-public class IndexController {
+public class ProfileController {
 
     @Autowired
     PlainService plainService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String getIndexPage(Model model) {
         return "index";
     }

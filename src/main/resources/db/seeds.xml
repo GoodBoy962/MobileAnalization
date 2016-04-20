@@ -9,6 +9,7 @@
     <changeSet id="bitches_1" author="GoodBoy">
         <loadUpdateData tableName="users" primaryKey="id" file="db/seeds/users.csv">
             <column name="id" type="numeric"/>
+            <column name="role" type="string"/>
         </loadUpdateData>
     </changeSet>
 

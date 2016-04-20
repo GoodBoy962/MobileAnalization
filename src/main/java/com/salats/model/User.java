@@ -2,6 +2,7 @@ package com.salats.model;
 
 import com.salats.enums.Gender;
 import com.salats.enums.Marital;
+import com.salats.enums.UserRole;
 import com.salats.enums.WorkStatus;
 
 import javax.persistence.*;
@@ -37,6 +38,17 @@ public class User {
     private String email;
 
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 
     public long getId() {
         return id;
