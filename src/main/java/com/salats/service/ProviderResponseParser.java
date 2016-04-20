@@ -1,6 +1,7 @@
 package com.salats.service;
 
 import com.salats.utils.Tariff;
+import com.salats.utils.UserInfo;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -11,6 +12,6 @@ import java.util.List;
  */
 public interface ProviderResponseParser {
 
-    List<Tariff> parse(HttpServletRequest request) throws IOException;
+    List<Tariff> parse(UserInfo userInfo) throws IOException;
 
 }

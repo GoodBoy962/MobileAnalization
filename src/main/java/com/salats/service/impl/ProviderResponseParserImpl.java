@@ -3,6 +3,7 @@ package com.salats.service.impl;
 import com.salats.service.ProviderResponseParser;
 import com.salats.service.UnlimTarrifsRequestCreateService;
 import com.salats.utils.Tariff;
+import com.salats.utils.UserInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -33,8 +34,8 @@ public class ProviderResponseParserImpl implements ProviderResponseParser {
     UnlimTarrifsRequestCreateService requestCreateService;
 
     @Override
-    public List<Tariff> parse(HttpServletRequest request) throws IOException {
-        String params = requestCreateService.createRequest(request);
+    public List<Tariff> parse(UserInfo userInfo) throws IOException {
+        String params = requestCreateService.createRequest(userInfo);
         Document doc = Jsoup.connect(providerCalculatorUrl + params).get();
         Elements tariffs = doc.getElementsByClass("tariff");
 

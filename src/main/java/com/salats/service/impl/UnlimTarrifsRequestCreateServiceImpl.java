@@ -1,11 +1,8 @@
 package com.salats.service.impl;
 
 import com.salats.service.UnlimTarrifsRequestCreateService;
+import com.salats.utils.UserInfo;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 /**
  * Created by aleksandrpliskin on 19.04.16.
@@ -13,20 +10,41 @@ import java.util.Map;
 @Service
 public class UnlimTarrifsRequestCreateServiceImpl implements UnlimTarrifsRequestCreateService {
     @Override
-    public String createRequest(HttpServletRequest request) {
+    public String createRequest(UserInfo userInfo) {
         String result = "?";
-        Map map = request.getParameterMap();
-        String[] operators = (String[]) map.get("operators[]");
-        String[] duration = (String[]) map.get("duration");
-        String[] byRussian = (String[]) map.get("by_russia");
-        String[] internet = (String[]) map.get("internet");
-        String[] sms = (String[]) map.get("sms");
-        RestTemplate restTemplate = new RestTemplate();
-        String requestParams = "";//TODO
+        String[] operators = new String[]{"1", "3", "4", "5"};
+        Integer duration = userInfo.getCall() / 60;
+        Integer durationID = 0;
+        if (duration < 30) {
+            durationID = 1;
+        } else if (duration < 100) {
+            durationID = 2;
+        } else {
+            durationID = 3;
+        }
+        String[] byRussian = {"0"};
+        Integer sms = userInfo.getCall() / 30;
+        Integer smsID = 0;
+        if (duration < 2) {
+            smsID = 0;
+        } else if (duration < 10) {
+            durationID = 1;
+        } else {
+            durationID = 2;
+        }
+        Integer internet = userInfo.getCall() / 30;
+        Integer internetID = 0;
+        if (duration < 2000) {
+            smsID = 0;
+        } else if (duration < 100000) {
+            durationID = 1;
+        } else {
+            durationID = 2;
+        }
         for (String operator : operators) {
             result += "operators%5B%5D=" + operator + "&";
         }
-        result += "duration=" + duration[0] + "&" + "by_russia=" + byRussian[0] + "&internet=" + internet[0] + "sms=" + sms[0];
+        result += "duration=" + durationID + "&" + "by_russia=" + byRussian[0] + "&internet=" + internetID + "sms=" + smsID;
         return result;
     }
 }

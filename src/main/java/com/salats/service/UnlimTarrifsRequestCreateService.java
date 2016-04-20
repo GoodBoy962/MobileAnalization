@@ -1,5 +1,7 @@
 package com.salats.service;
 
+import com.salats.utils.UserInfo;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -7,6 +9,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface UnlimTarrifsRequestCreateService {
 
-    public String createRequest(HttpServletRequest request);
+    public String createRequest(UserInfo userInfo);
 
 }
