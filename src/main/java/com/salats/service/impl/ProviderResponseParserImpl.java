@@ -63,6 +63,10 @@ public class ProviderResponseParserImpl implements ProviderResponseParser {
             tariff.setFeatures(features);
             response.add(tariff);
         }
+        response.sort((o1, o2) -> o1.getPrice().compareTo(o2.getPrice()));
+        while (response.size() > 3) {
+            response.remove(response.size() - 1);
+        }
         return response;
     }
 
