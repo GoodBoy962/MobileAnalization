@@ -26,11 +26,6 @@ public class UserInfoController {
     ProviderResponseParser parser;
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String getSearchPage() {
-        return "search";
-    }
-
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchTarifs(Model model) throws IOException {
         List<Tariff> tariff = parser.parse(userService.getInfoByCurrentUser());
         model.addAttribute("tariffs", tariff);
