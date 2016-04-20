@@ -33,8 +33,18 @@ public class UserServiceImpl implements UserService {
     public UserInfo getInfoByCurrentUser() {
         User user = SecurityUtils.getCurrentUser();
         Integer sms = smsRepository.findSmsCountByUserBetweenStartDateAndEndDate(user);
+        Integer web;
+        Integer wifi;
+        web = webConnectionRepository.findDurationByUser(user);
+        if (web == null) {
+            web = 0;
+        }
+        wifi = wifiConnectionRepository.findDurationByUser(user);
+        if (wifi == null) {
+            wifi = 0;
+        }
         Integer call = callRepository.findSumDurationByUserBetweenStartDateAndEndDate(user);
-        Integer webTraffic = webConnectionRepository.findDurationByUser(user) - wifiConnectionRepository.findDurationByUser(user);
+        Integer webTraffic = web - wifi;
         UserInfo userInfo = new UserInfo();
         userInfo.setSms(sms);
         userInfo.setCall(call);

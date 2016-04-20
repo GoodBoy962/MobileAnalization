@@ -23,23 +23,23 @@ public class UnlimTarrifsRequestCreateServiceImpl implements UnlimTarrifsRequest
             durationID = 3;
         }
         String[] byRussian = {"0"};
-        Integer sms = userInfo.getCall() / 30;
+        Integer sms = userInfo.getSms() / 30;
         Integer smsID = 0;
         if (sms < 2) {
             smsID = 0;
         } else if (sms < 10) {
-            durationID = 1;
+            smsID = 1;
         } else {
-            durationID = 2;
+            smsID = 2;
         }
-        Integer internet = userInfo.getCall() / 30;
+        Integer internet = userInfo.getWebTraffic() / 2;
         Integer internetID = 0;
         if (internet < 2000) {
-            smsID = 0;
+            internetID = 0;
         } else if (internet < 100000) {
-            durationID = 1;
+            internetID = 1;
         } else {
-            durationID = 2;
+            internetID = 2;
         }
         for (String operator : operators) {
             result += "operators%5B%5D=" + operator + "&";
