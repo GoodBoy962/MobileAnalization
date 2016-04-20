@@ -42,8 +42,16 @@ public class ProviderResponseParserImpl implements ProviderResponseParser {
         List<Tariff> response = new ArrayList<>();
         for (Element t : tariffs) {
             Tariff tariff = new Tariff();
-            String link = providerRoot + t.select(".header").get(0).children().get(0).attr("href");
-            tariff.setLink(link);
+            String name = t.select(".header").get(0).children().get(0).text();
+            tariff.setName(name);
+            int price;
+            // Чтобы Наиль блеванул
+            try {
+                price = Integer.valueOf(t.nextElementSibling().select(".cost_shop").get(1).text().replace(" ", ""));
+            } catch (IndexOutOfBoundsException e) {
+                price = Integer.valueOf(t.nextElementSibling().select(".cost_shop").get(0).text().replace(" ", ""));
+            }
+            tariff.setPrice(price);
             List<String> features = t.select(".features").get(0).children().get(0).children()
                     .stream()
                     .map(Element::text)

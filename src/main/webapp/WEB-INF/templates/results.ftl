@@ -3,7 +3,8 @@
 <ul>
     <#list tariffs as t>
         <li>
-            <a target="_blank" href="${t.link}">Link</a>
+            <h2>Name: ${t.name}</h2>
+            <h3>Price: ${t.price}</h3>
             <ul>
                 <#list t.features as f>
                     <li>${f}</li>

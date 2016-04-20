@@ -35,7 +35,6 @@
                              always-use-default-target="true"
                              authentication-failure-url="/login?error=true"/>
         <security:logout logout-url="/logout" logout-success-url="/login"/>
-        <security:csrf disabled="true"/>
     </security:http>
 
 </beans>
