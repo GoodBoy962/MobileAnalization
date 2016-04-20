@@ -17,7 +17,7 @@ public class AuthController {
         return "login";
     }
 
-    @RequestMapping(value = "/default")
+    @RequestMapping(value = "/")
     public String getProfilePage(HttpServletRequest request) {
         if (request.isUserInRole("ROLE_USER")) {
             return "redirect:/profile";

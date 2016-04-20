@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +41,12 @@ public class ProviderResponseParserImpl implements ProviderResponseParser {
         List<Tariff> response = new ArrayList<>();
         for (Element t : tariffs) {
             Tariff tariff = new Tariff();
-            String name = t.select(".header").get(0).children().get(0).text();
+
+            String link = t.select(".header").get(0).children().get(0).attr("href");
+            Document tariffInfo = Jsoup.connect(providerRoot + link).get();
+            String name = tariffInfo.select("p.h1").get(0).text();
             tariff.setName(name);
+
             int price;
             // Чтобы Наиль блеванул
             try {
@@ -52,6 +55,7 @@ public class ProviderResponseParserImpl implements ProviderResponseParser {
                 price = Integer.valueOf(t.nextElementSibling().select(".cost_shop").get(0).text().replace(" ", ""));
             }
             tariff.setPrice(price);
+
             List<String> features = t.select(".features").get(0).children().get(0).children()
                     .stream()
                     .map(Element::text)
