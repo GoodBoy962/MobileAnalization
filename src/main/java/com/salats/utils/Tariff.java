@@ -13,6 +13,8 @@ public class Tariff {
 
     private List<String> features;
 
+    private String link;
+
     public String getName() {
         return name;
     }
@@ -35,5 +37,13 @@ public class Tariff {
 
     public void setFeatures(List<String> features) {
         this.features = features;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }

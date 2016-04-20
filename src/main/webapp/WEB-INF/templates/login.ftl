@@ -17,13 +17,8 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
-                                <#--<div class="checkbox">-->
-                                    <#--<label>-->
-                                        <#--<input name="rem" type="checkbox" value="Remember Me">Remember Me-->
-                                    <#--</label>-->
-                                <#--</div>-->
                                 <div class="form-group">
-                                    <input class="btn btn-lg btn-success btn-block" type="submit" value="Sign in">
+                                    <input class="btn btn-block btn-primary" type="submit" value="Sign in">
                                 </div>
                             </fieldset>
                         </form>

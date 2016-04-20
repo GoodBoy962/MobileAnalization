@@ -46,6 +46,7 @@ public class ProviderResponseParserImpl implements ProviderResponseParser {
             Document tariffInfo = Jsoup.connect(providerRoot + link).get();
             String name = tariffInfo.select("p.h1").get(0).text();
             tariff.setName(name);
+            tariff.setLink("https://www.google.ru/#newwindow=1&q=" + tariff.getName());
 
             int price;
             // Чтобы Наиль блеванул
