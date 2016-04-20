@@ -7,16 +7,26 @@ import java.util.List;
  */
 public class Tariff {
 
-    private String link;
+    private String name;
+
+    private int price;
 
     private List<String> features;
 
-    public String getLink() {
-        return link;
+    public String getName() {
+        return name;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public List<String> getFeatures() {
