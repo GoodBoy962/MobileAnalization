@@ -9,6 +9,7 @@
             <list>
                 <value>classpath:database.properties</value>
                 <value>classpath:web.properties</value>
+                <value>classpath:liquibase.properties</value>
             </list>
         </property>
     </bean>
